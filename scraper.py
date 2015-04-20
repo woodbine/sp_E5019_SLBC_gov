@@ -31,8 +31,8 @@ for link in links:
 	if '_csv' in url:
 		title = link.contents[0]
 		# create the right strings for the new filename
-		csvYr = title.split(' ')[5]
-		csvMth = title.split(' ')[4][:3]
+		csvYr = title.split(' ')[6]
+		csvMth = title.split(' ')[5][:3]
 		csvMth = csvMth.upper()
 		csvMth = convert_mth_strings(csvMth);
 		filename = entity_id + "_" + csvYr + "_" + csvMth + ".csv"

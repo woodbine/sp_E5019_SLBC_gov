@@ -83,7 +83,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "E5019_SLBC_gov"
-url = 'http://www.southwark.gov.uk/downloads/200110/council_budgets_and_spending'
+url = 'http://www.2.southwark.gov.uk/downloads/download/4574/council_spending_-_201617'
 errors = 0
 data = []
 

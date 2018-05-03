@@ -83,7 +83,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "E5019_SLBC_gov"
-url = 'http://www.2.southwark.gov.uk/downloads/200212/egovernment'
+url = 'http://www.southwark.gov.uk/council-and-democracy/open-data'
 errors = 0
 data = []
 
@@ -95,22 +95,15 @@ soup = BeautifulSoup(html, 'lxml')
 
 #### SCRAPE DATA
 
-ul_lists = soup.find('ul', 'list').find_all('a')
+ul_lists = soup.find('table', 'table').find_all('a')
 for ul_list in ul_lists:
-    if 'spending' in ul_list['href']:
+    if ('spending' in ul_list.text or 'ransparency' in ul_list.text) and '.csv' in ul_list['href']:
         url = ul_list['href']
-        html = urllib2.urlopen(url)
-        soup = BeautifulSoup(html, 'lxml')
-        block = soup.find('ul',{'class':'list'})
-        links = block.findAll('a', href=True)
-        for link in links:
-            url = link['href']
-            if '_csv' in url or '_cvs' in url:
-                title = link.contents[0]
-                csvYr = title.split(' ')[4]
-                csvMth = title.split(' ')[3][:3]
-                csvMth = convert_mth_strings(csvMth.upper())
-                data.append([csvYr, csvMth, url])
+        title = ul_list.text.split()
+        csvYr = title[-1]
+        csvMth = title[-2][:3]
+        csvMth = convert_mth_strings(csvMth.upper())
+        data.append([csvYr, csvMth, url])
 
 #### STORE DATA 1.0
 
